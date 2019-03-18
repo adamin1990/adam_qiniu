@@ -1,0 +1,2 @@
+
+$type='adam_qiniu';

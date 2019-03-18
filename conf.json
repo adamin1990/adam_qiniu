@@ -1,0 +1,11 @@
+{
+    "name": "Adam七牛云存储",
+    "brief": "七牛存储<a href='https://www.lixiaopeng.top' target='_blank'>安装说明</a>",
+    "version": "1.0",
+    "bbs_version": "4.0.4",
+    "installed": 0,
+    "enable": 0,
+    "hooks_rank": [],
+    "overwrites_rank": [],
+    "dependencies": []
+}

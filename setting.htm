@@ -1,0 +1,74 @@
+<?php include _include(ADMIN_PATH.'view/htm/header.inc.htm');?>
+
+<div class="row">
+    <div class="col-lg-10 offset-lg-1">
+        <div class="card">
+            <div class="card-block">
+                <form method="post" id="form">
+                    <h4 class="card-title">七牛云存储插件配置</h4>
+                    <p class="small text-grey">参考：<a href='http://www.lixiaopeng.top/article/52.html' target='_blank'>http://www.lixiaopeng.top/article/52.html</a></p>
+                    <div class="card card-block">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <fieldset class="form-group">
+                                    <label for="accessKey">AK：</label>
+                                    <input class="form-control" type="text" id="accessKey" name="accessKey" placeholder="accessKey" value="<?php echo $config['accessKey'] ?>">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-9">
+                                <fieldset class="form-group">
+                                    <label for="secretKey">SK：</label>
+                                    <input class="form-control" type="text" id="secretKey" name="secretKey" value="<?php echo $config['secretKey'] ?>">
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <fieldset class="form-group">
+                                    <label for="bucket">bucket名称：</label>
+                                    <input class="form-control" type="text" id="bucket" name="bucket" value="<?php echo $config['bucket'] ?>">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-9">
+                                <fieldset class="form-group">
+                                    域名 <label for="cdnurl"><p class="small text-grey">(例如:http://oqfvp37jq.bkt.clouddn.com，末尾请不要加'/')</p></label>
+                                    <input class="form-control" type="text" id="cdnurl" name="cdnurl" value="<?php echo $config['cdnurl'] ?>">
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary btn-block" id="submit" data-loading-text="<?php echo lang('submiting');?>..."><?php echo lang('confirm');?></button>
+                                <!--<button type="button" id="save" class="btn btn-primary">保存</button>-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?php include _include(ADMIN_PATH.'view/htm/footer.inc.htm');?>
+<script>
+    var jform = $("#form");
+    var jsubmit = $("#submit");
+    var referer = '<?php echo http_referer();?>';
+    jform.on('submit', function(){
+        jform.reset();
+        jsubmit.button('loading');
+        var postdata = jform.serialize();
+        $.xpost("<?php echo url('plugin-setting-adam_qiniu');?>", postdata, function(code, message) {
+            if(code == 0) {
+                $.alert(message);
+                jsubmit.text(message).delay(2000).button('reset').location(referer);
+                return;
+            } else {
+                $.alert(message);
+                jsubmit.button('reset');
+            }
+        });
+        return false;
+    });
+
+</script>
