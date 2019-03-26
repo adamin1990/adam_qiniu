@@ -21,9 +21,9 @@ if ($method == 'GET'){
 
 return array(
     'accessKey' => '{$post_data['accessKey']}',
-    'accessKeySecret' => '{$post_data['secretKey']}',
+    'secretKey' => '{$post_data['secretKey']}',
     'bucket' => '{$post_data['bucket']}',
-    'oss_url' => '{$post_data['cdnurl']}',
+    'cdnurl' => '{$post_data['cdnurl']}',
 );";
 
     try{
